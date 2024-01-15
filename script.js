@@ -55,7 +55,7 @@ function gravity(){
 
 function jump(){
     jump_audio.play();
-    bird.style.rotate = 0 +"deg";
+    bird.style.rotate = -30 +"deg";
     bird.classList.add("bird_change");
     setTimeout(()=>{
         bird.classList.remove("bird_change");
@@ -83,7 +83,7 @@ function checkDeath(){
     let pipeLeft = parseInt(window.getComputedStyle(pipe).getPropertyValue("left"));
     let holeTop = parseInt(window.getComputedStyle(hole).getPropertyValue("top"));
 
-    if((birdTop > 520)||((pipeLeft<70)&&(pipeLeft>-10)&&((birdTop<holeTop)||(birdTop>holeTop+140)))){
+    if((birdTop > 520)||((pipeLeft<70)&&(pipeLeft>-10)&&((birdTop<holeTop)||(birdTop>holeTop+90)))){
         if(!(gameFlag)){
             gameOver();
         }

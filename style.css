@@ -92,7 +92,7 @@ body{
 }
 .hole{
     position:absolute;
-    height:200px;
+    height:150px;
     top:10px;
     width:70px;
     background-color: rgb(118,225,255);
