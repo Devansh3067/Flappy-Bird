@@ -1,10 +1,10 @@
 @font-face {
     font-family: Bungee Spice;
-    src: url(a_Bungee_Spice.ttf);
+    src: url(fonts/a_Bungee_Spice.ttf);
 }
 @font-face {
     font-family: Bebas Neue;
-    src: url(a_Bebas_Neue.ttf);
+    src: url(fonts/a_Bebas_Neue.ttf);
 }
 *{
     padding: 0;
@@ -15,7 +15,7 @@ body{
     background-color: rgb(115,224,255);
 }
 .game-container{
-    background-image: url(a_bg.png);
+    background-image: url(images/a_bg.png);
     background-size: cover;
     overflow : hidden;
     position : relative;
@@ -72,7 +72,7 @@ body{
     cursor:pointer;
 }
 .pipe{
-    background-image: url(a_pipe.png);
+    background-image: url(images/a_pipe.png);
     position : absolute;
     height : 100%;
     width : 70px;
@@ -105,14 +105,14 @@ body{
     top:30px;
     left:5px;
     /* background-color: red; */
-    background-image: url("a_bird_up.png");
+    background-image: url("images/a_bird_up.png");
     background-size: 100%;
 }
 .bird_change{
-    background-image: url("a_bird_down.png");
+    background-image: url("images/a_bird_down.png");
     background-size: 100%;
 }
 .bird_die{
-    background-image: url("a_bird_die.png");
+    background-image: url("images/a_bird_die.png");
     background-size: 99%;
 }

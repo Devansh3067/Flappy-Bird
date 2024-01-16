@@ -7,12 +7,12 @@ let score = document.querySelector(".score");
 
 let gameFlag = false;
 
-let bgm = new Audio("a_bgm.mp3");
+let bgm = new Audio("audio/a_bgm.mp3");
 bgm.play();
 bgm.loop = true;
-let die = new Audio("a_die.mp3");
-let jump_audio = new Audio("a_jump.mp3");
-let point = new Audio("a_point.mp3");
+let die = new Audio("audio/a_die.mp3");
+let jump_audio = new Audio("audio/a_jump.mp3");
+let point = new Audio("audio/a_point.mp3");
 
 let scoreCount = 0;
 
