@@ -36,7 +36,7 @@ hole.addEventListener("animationiteration",()=>{
     hole.style.top = randomN + "px";
 })
 
-function scoreUpdate(scoreC){
+function scoreUpdate(scoreC){ 
     point.play();
     score.innerHTML = "Your Score : "+ scoreC;
 }
