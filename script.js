@@ -18,79 +18,81 @@ let scoreCount = 0;
 
 let jumping = false;
 
-document.addEventListener("click",()=>{
-    if(pipe.classList.contains("animate-article")){
+let isGameOver = false;
+
+document.addEventListener("click", () => {
+    if (pipe.classList.contains("animate-article")) {
         jump();
     }
 });
-document.addEventListener("keydown",(event)=>{
-    if((event.keyCode == 38 || event.keyCode == 32)&& pipe.classList.contains("animate-article")){
+document.addEventListener("keydown", (event) => {
+    if ((event.keyCode == 38 || event.keyCode == 32) && pipe.classList.contains("animate-article")) {
         jump();
     }
 });
 
-hole.addEventListener("animationiteration",()=>{
+hole.addEventListener("animationiteration", () => {
     scoreCount++;
     scoreUpdate(scoreCount);
-    var randomN = ((Math.random()*400)+10);
+    var randomN = ((Math.random() * 350) + 10);
     hole.style.top = randomN + "px";
 })
 
-function scoreUpdate(scoreC){
+function scoreUpdate(scoreC) {
     point.play();
-    score.innerHTML = "Your Score : "+ scoreC;
+    score.innerHTML = "Your Score : " + scoreC;
 }
 
-let jumping_interval = setInterval(()=>{
-    if(!(jumping)){
+let jumping_interval = setInterval(() => {
+    if (!(jumping)) {
         gravity();
     }
-},10);
+}, 10);
 
-function gravity(){
+function gravity() {
     let birdTop = parseInt(window.getComputedStyle(bird).getPropertyValue("top"));
-    bird.style.rotate = 45+"deg";
+    bird.style.rotate = 45 + "deg";
     bird.style.top = birdTop + 3 + "px";
 }
 
-function jump(){
+function jump() {
     jump_audio.play();
-    bird.style.rotate = -30 +"deg";
+    bird.style.rotate = -30 + "deg";
     bird.classList.add("bird_change");
-    setTimeout(()=>{
+    setTimeout(() => {
         bird.classList.remove("bird_change");
-    },90)
+    }, 90)
     jumping = true;
     let jumpCount = 0;
-    var jumpInterval = setInterval(function(){
+    var jumpInterval = setInterval(function () {
         let birdTop = parseInt(window.getComputedStyle(bird).getPropertyValue("top"));
-        if(birdTop > 10){
+        if (birdTop > 10) {
             bird.style.top = birdTop - 5 + "px";
         }
-        if (jumpCount > 20){
+        if (jumpCount > 20) {
             clearInterval(jumpInterval);
             jumping = false;
             jumpCount = 0;
         }
         jumpCount++;
-    },10);
+    }, 10);
 }
 
-setInterval(checkDeath,1);
+setInterval(checkDeath, 1);
 
-function checkDeath(){
+function checkDeath() {
     birdTop = parseInt(window.getComputedStyle(bird).getPropertyValue("top"));
     let pipeLeft = parseInt(window.getComputedStyle(pipe).getPropertyValue("left"));
     let holeTop = parseInt(window.getComputedStyle(hole).getPropertyValue("top"));
 
-    if((birdTop > 520)||((pipeLeft<70)&&(pipeLeft>-10)&&((birdTop<holeTop)||(birdTop>holeTop+90)))){
-        if(!(gameFlag)){
+    if ((birdTop > 510) || ((pipeLeft < 70) && (pipeLeft > -10) && ((birdTop < holeTop - 10) || (birdTop > holeTop + 160)))) {
+        if (!(gameFlag)) {
             gameOver();
         }
     }
 }
 
-function gameOver(){
+function gameOver() {
     bgm.pause();
     bgm.currentTime = 0;
     bird.classList.add("bird_die");
@@ -106,9 +108,11 @@ function gameOver(){
     hole.classList.remove("animate-article");
     game_over.style.visibility = "visible";
     restart_btn.style.visibility = "visible";
+    isGameOver = true;
 }
 
-restart_btn.addEventListener("click", ()=>{
+const restartFunction = () => {
+    isGameOver = false;
     bgm.play();
     bgm.loop = true;
     bird.classList.remove("bird_die");
@@ -118,13 +122,22 @@ restart_btn.addEventListener("click", ()=>{
     restart_btn.style.visibility = "hidden";
     pipe.classList.add("animate-article");
     hole.classList.add("animate-article");
-    jumping_interval = setInterval(()=>{
-        if(!(jumping)){
+    jumping_interval = setInterval(() => {
+        if (!(jumping)) {
             gravity();
         }
-    },10);
-    setInterval(checkDeath,1);
+    }, 10);
+    setInterval(checkDeath, 1);
     scoreCount = 0;
     scoreUpdate(scoreCount);
     gameFlag = false;
+}
+
+document.addEventListener("keydown", (event) => {
+    console.log(event.keyCode);
+    if ((event.keyCode == 13) || (event.keyCode == 32 && isGameOver)) {
+        restartFunction();
+    }
 })
+
+restart_btn.addEventListener("click", restartFunction);

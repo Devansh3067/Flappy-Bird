@@ -19,8 +19,8 @@ body{
     background-size: cover;
     overflow : hidden;
     position : relative;
-    width:600px;
-    height:580px;
+    width:60vw;
+    height:90vh;
     /* background-color: red; */
     margin: 30px auto;
     border : 1px solid black;
@@ -47,8 +47,9 @@ body{
     visibility: hidden;
     font-size : 5rem;
     position : absolute;
-    left : 65px;
-    top : 180px;
+    left : 22%;
+    top : 40%;
+    /* transform: translate(-50%,%); */
     z-index : 99;
     font-family : Bungee Spice;
 }
@@ -63,8 +64,8 @@ body{
     color:rgb(40, 40, 203);
     background-color: rgb(188, 221, 80);
     position: absolute;
-    top:280px;
-    left: 250px;
+    left : 45%;
+    top : 60%;
 }
 .restart-btn:hover{
     color:rgb(188, 221, 80);
@@ -92,7 +93,7 @@ body{
 }
 .hole{
     position:absolute;
-    height:150px;
+    height:200px;
     top:10px;
     width:70px;
     background-color: rgb(118,225,255);
