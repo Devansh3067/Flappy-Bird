@@ -1,1 +1,0 @@
-console.log(window.getComputedStyle(animation).getPropertyValue("animationDuration"));
