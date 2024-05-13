@@ -4,6 +4,8 @@ let bird = document.querySelector(".bird");
 let game_over = document.querySelector(".game-over");
 let restart_btn = document.querySelector(".restart-btn");
 let score = document.querySelector(".score");
+let highestScore = document.querySelector("#highestScore");
+let animation = document.querySelector(".animate-article");
 
 let gameFlag = false;
 
@@ -15,10 +17,13 @@ let jump_audio = new Audio("audio/a_jump.mp3");
 let point = new Audio("audio/a_point.mp3");
 
 let scoreCount = 0;
+let highestScoreCount = parseInt(localStorage.getItem('highestScore')) || 0;
+highestScore.innerHTML = "Highest Score : " + highestScoreCount;
 
 let jumping = false;
 
 let isGameOver = false;
+console.log(parseInt(localStorage.getItem('highestScore')));
 
 document.addEventListener("click", () => {
     if (pipe.classList.contains("animate-article")) {
@@ -33,14 +38,34 @@ document.addEventListener("keydown", (event) => {
 
 hole.addEventListener("animationiteration", () => {
     scoreCount++;
-    scoreUpdate(scoreCount);
+    if (scoreCount > highestScoreCount) {
+        highestScoreCount = scoreCount;
+        localStorage.setItem('highestScore', highestScoreCount);
+        // console.log(highestScoreCount);
+    }
+
+    scoreUpdate(scoreCount, highestScoreCount);
     var randomN = ((Math.random() * 350) + 10);
     hole.style.top = randomN + "px";
 })
 
-function scoreUpdate(scoreC) {
+const handleDifficulty = (scoreC) => {
+    if (scoreC > 1 && scoreC <= 15 && parseInt(window.getComputedStyle(hole).getPropertyValue("height")) >= 150) {
+        hole.style.height = parseInt(window.getComputedStyle(hole).getPropertyValue("height")) - 2 + "px";
+        // console.log(parseInt(window.getComputedStyle(hole).getPropertyValue("height")));
+    }
+    if (scoreC > 15 && parseInt(window.getComputedStyle(hole).getPropertyValue("height")) >= 150) {
+        hole.style.height = parseInt(window.getComputedStyle(hole).getPropertyValue("height")) - 10 + "px";
+        animation.style.animationDuration = parseInt(window.getComputedStyle(animation).getPropertyValue("animationDuration")) - 0.05 + 's';
+        // console.log(parseInt(window.getComputedStyle(hole).getPropertyValue("height")));
+    }
+}
+
+function scoreUpdate(scoreCount, highestScoreCount) {
     point.play();
-    score.innerHTML = "Your Score : " + scoreC;
+    score.innerHTML = "Your Score : " + scoreCount;
+    highestScore.innerHTML = "Highest Score : " + highestScoreCount;
+    handleDifficulty(scoreCount);
 }
 
 let jumping_interval = setInterval(() => {
@@ -85,7 +110,7 @@ function checkDeath() {
     let pipeLeft = parseInt(window.getComputedStyle(pipe).getPropertyValue("left"));
     let holeTop = parseInt(window.getComputedStyle(hole).getPropertyValue("top"));
 
-    if ((birdTop > 510) || ((pipeLeft < 70) && (pipeLeft > -10) && ((birdTop < holeTop - 10) || (birdTop > holeTop + 160)))) {
+    if ((birdTop > 510) || ((pipeLeft < 70) && (pipeLeft > -10) && ((birdTop < holeTop - 10) || (birdTop > holeTop + parseInt(window.getComputedStyle(hole).getPropertyValue("height")) - 40)))) {
         if (!(gameFlag)) {
             gameOver();
         }
@@ -113,6 +138,8 @@ function gameOver() {
 
 const restartFunction = () => {
     isGameOver = false;
+    hole.style.height = 200 + "px";
+    animation.style.animationDuration = 2 + 's';
     bgm.play();
     bgm.loop = true;
     bird.classList.remove("bird_die");
@@ -129,12 +156,12 @@ const restartFunction = () => {
     }, 10);
     setInterval(checkDeath, 1);
     scoreCount = 0;
-    scoreUpdate(scoreCount);
+    scoreUpdate(scoreCount, highestScoreCount);
     gameFlag = false;
 }
 
 document.addEventListener("keydown", (event) => {
-    console.log(event.keyCode);
+    // console.log(event.keyCode);
     if ((event.keyCode == 13) || (event.keyCode == 32 && isGameOver)) {
         restartFunction();
     }

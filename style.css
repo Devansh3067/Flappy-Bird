@@ -43,6 +43,19 @@ body{
     color:rgba(125, 189, 83, 0.933);
     background-color: rgb(124, 36, 36);
 }
+#highestScore {
+    z-index: 99;
+    font-family:Bebas Neue;
+    position:absolute;
+    border : 1px solid black;
+    padding: 7px;
+    border-radius: 10px;
+    left: 0;
+    margin: 10px;
+    font-size: 1.5rem;
+    color:rgb(124, 36, 36);
+    background-color: rgba(125, 189, 83, 0.933);
+}
 .game-over{
     visibility: hidden;
     font-size : 5rem;
@@ -117,3 +130,9 @@ body{
     background-image: url("images/a_bird_die.png");
     background-size: 99%;
 }
+
+@media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  }
