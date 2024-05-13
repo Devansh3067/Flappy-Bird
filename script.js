@@ -23,7 +23,7 @@ highestScore.innerHTML = "Highest Score : " + highestScoreCount;
 let jumping = false;
 
 let isGameOver = false;
-console.log(parseInt(localStorage.getItem('highestScore')));
+// console.log(parseInt(localStorage.getItem('highestScore')));
 
 document.addEventListener("click", () => {
     if (pipe.classList.contains("animate-article")) {
