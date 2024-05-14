@@ -25,13 +25,14 @@ let jumping = false;
 let isGameOver = false;
 // console.log(parseInt(localStorage.getItem('highestScore')));
 
-document.addEventListener("click", () => {
-    if (pipe.classList.contains("animate-article")) {
+document.addEventListener("click", (event) => {
+    if (pipe.classList.contains("animate-article") && !pipe.classList.contains("paused-animation")) {
         jump();
     }
 });
 document.addEventListener("keydown", (event) => {
-    if ((event.keyCode == 38 || event.keyCode == 32) && pipe.classList.contains("animate-article")) {
+    // console.log(event.keyCode);
+    if ((event.keyCode == 38 || event.keyCode == 32) && pipe.classList.contains("animate-article") && !pipe.classList.contains("paused-animation")) {
         jump();
     }
 });
@@ -91,7 +92,7 @@ function jump() {
     let jumpCount = 0;
     var jumpInterval = setInterval(function () {
         let birdTop = parseInt(window.getComputedStyle(bird).getPropertyValue("top"));
-        if (birdTop > 10) {
+        if (birdTop > 1) {
             bird.style.top = birdTop - 5 + "px";
         }
         if (jumpCount > 20) {
@@ -168,3 +169,38 @@ document.addEventListener("keydown", (event) => {
 })
 
 restart_btn.addEventListener("click", restartFunction);
+
+let isPaused = false;
+
+function pause() {
+    if (!(isPaused)) {
+        bgm.pause();
+        clearInterval(jumping_interval);
+        birdTop = parseInt(window.getComputedStyle(bird).getPropertyValue("top"));
+        pipeLeft = parseInt(window.getComputedStyle(pipe).getPropertyValue("left"));
+        bird.style.top = birdTop + "px";
+        pipe.style.left = pipeLeft + "px";
+        hole.style.left = pipeLeft + "px";
+        pipe.classList.add("paused-animation");
+        hole.classList.add("paused-animation");
+        isPaused = true;
+    }
+    else {
+        bgm.play();
+        bgm.loop = true;
+        pipe.classList.remove("paused-animation");
+        hole.classList.remove("paused-animation");
+        jumping_interval = setInterval(() => {
+            if (!(jumping)) {
+                gravity();
+            }
+        }, 10);
+        isPaused = false;
+    }
+}
+
+document.addEventListener("keydown", (event) => {
+    if (event.keyCode == 75 && !isGameOver) {
+        pause();
+    }
+})

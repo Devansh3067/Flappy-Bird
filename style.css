@@ -46,39 +46,45 @@ body{
 #highestScore {
     z-index: 99;
     font-family:Bebas Neue;
-    position:absolute;
     border : 1px solid black;
     padding: 7px;
     border-radius: 10px;
+    position:absolute;
     left: 0;
     margin: 10px;
     font-size: 1.5rem;
     color:rgb(124, 36, 36);
     background-color: rgba(125, 189, 83, 0.933);
 }
+#highestScore:hover{
+    color:rgba(125, 189, 83, 0.933);
+    background-color: rgb(124, 36, 36);
+    /* cursor: none; */
+}
 .game-over{
     visibility: hidden;
-    font-size : 5rem;
-    position : absolute;
-    left : 22%;
-    top : 40%;
-    /* transform: translate(-50%,%); */
-    z-index : 99;
-    font-family : Bungee Spice;
+    font-size: 3rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+    font-family: Bungee Spice;
 }
 .restart-btn{
-    font-family:Bebas Neue;
-    font-weight : 900;
+    font-family: Bebas Neue;
+    font-weight: 900;
     visibility: hidden;
     z-index: 99;
-    font-size:1.2rem;
+    font-size: 1.2rem;
     padding: 2px 9px;
-    border-radius:10px;
-    color:rgb(40, 40, 203);
+    border-radius: 10px;
+    color: rgb(40, 40, 203);
     background-color: rgb(188, 221, 80);
     position: absolute;
-    left : 45%;
-    top : 60%;
+    left: 50%;
+    top: 60%;
+    transform: translateX(-50%);
 }
 .restart-btn:hover{
     color:rgb(188, 221, 80);
@@ -131,8 +137,133 @@ body{
     background-size: 99%;
 }
 
-@media only screen and (max-width: 600px) {
-    body {
-      background-color: lightblue;
+.paused-animation {
+    animation-play-state: paused;
+}
+
+.controls {
+    font-family:Bebas Neue;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color:rgb(0, 16, 244);
+    text-align: center;
+
+}
+.controls h1{
+    font-weight: bold;
+    color:rgba(190, 48, 32, 0.972);
+}
+
+@media(max-width:1000px){
+    .controls{
+        display: none;
     }
-  }
+}
+@media(max-width:965px){
+    .game-over{
+        font-size: 2rem;
+        left: 45%;
+    }
+    .restart-btn{
+        left: 45%;
+    }
+}
+
+@media(max-width:650px){
+    .game-container{
+        width:100vw;
+        height:68vh;
+        margin:auto;
+        border-radius: 0;
+    }
+}
+
+@media(max-width:580px){
+    .game-over{
+        font-size: 2rem;
+    }
+}
+
+@media(max-width:386px){
+    .game-over{
+        font-size: 1.8rem;
+        left: 50%;
+    }
+    .score{
+        z-index: 99;
+        font-family:Bebas Neue;
+        position:absolute;
+        border : 1px solid black;
+        padding: 3px;
+        border-radius: 10px;
+        right: 0;
+        /* margin: 10px; */
+        font-size: 1.3rem;
+        color:rgb(124, 36, 36);
+        background-color: rgba(125, 189, 83, 0.933);
+    }
+    #highestScore{
+        z-index: 99;
+        font-family:Bebas Neue;
+        position:absolute;
+        border : 1px solid black;
+        padding: 3px;
+        border-radius: 10px;
+        /* margin: 10px; */
+        font-size: 1.3rem;
+        color:rgb(124, 36, 36);
+        background-color: rgba(125, 189, 83, 0.933);
+    }
+}
+
+@media(max-width:344px){
+    .game-over{
+        font-size: 1.8rem;
+        left: 45%;
+    }
+    .restart-btn{
+        left: 45%;
+    }
+}
+
+@media(max-width:315px){
+    .game-over{
+        /* top:45%; */
+        left: 55%;
+    }
+    .restart-btn{
+        scale:0.8;
+        left: 45%;
+    }
+}
+
+@media(max-width:270px){
+    .score{
+        z-index: 99;
+        font-family:Bebas Neue;
+        position:absolute;
+        border : 1px solid black;
+        padding: 3px;
+        border-radius: 10px;
+        right: 0;
+        /* margin: 10px; */
+        font-size: 1rem;
+        color:rgb(124, 36, 36);
+        background-color: rgba(125, 189, 83, 0.933);
+    }
+    #highestScore{
+        z-index: 99;
+        font-family:Bebas Neue;
+        position:absolute;
+        border : 1px solid black;
+        padding: 3px;
+        border-radius: 10px;
+        /* margin: 10px; */
+        font-size: 1rem;
+        color:rgb(124, 36, 36);
+        background-color: rgba(125, 189, 83, 0.933);
+    }
+}
