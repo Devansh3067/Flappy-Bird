@@ -77,13 +77,13 @@ let jumping_interval = setInterval(() => {
 
 function gravity() {
     let birdTop = parseInt(window.getComputedStyle(bird).getPropertyValue("top"));
-    bird.style.rotate = 45 + "deg";
+    bird.style.transform = "rotate(45deg)";
     bird.style.top = birdTop + 3 + "px";
 }
 
 function jump() {
     jump_audio.play();
-    bird.style.rotate = -30 + "deg";
+    bird.style.transform = "rotate(-30deg)";
     bird.classList.add("bird_change");
     setTimeout(() => {
         bird.classList.remove("bird_change");
